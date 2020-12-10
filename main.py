@@ -16,7 +16,7 @@ import datetime
 
 origins =[
     "http://localhost.tiangolo.com","https://localhost.tiangolo.com",
-    "https://localhost", "http://localhost:8080"
+    "https://localhost", "http://localhost:8080", "https://cajero-api1912.herokuapp.com"
 ]
 
 api.add_middleware(
