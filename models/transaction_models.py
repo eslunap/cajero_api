@@ -3,7 +3,8 @@ from datetime import datetime
 
 class TransactionIn(BaseModel):
    
-    value: int username: str
+    value: int 
+    username: str
 
 class TransactionOut(BaseModel):
     id_transaction: int
