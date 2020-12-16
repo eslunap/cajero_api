@@ -6,3 +6,6 @@ class UserIn(BaseModel):
 class UserOut(BaseModel):
     username: str
     balance: int
+
+    class Config:
+        orm_mode = True

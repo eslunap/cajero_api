@@ -1,26 +1,37 @@
-from typing import Dict
-from pydantic import BaseModel
+#from typing import Dict
+#from pydantic import BaseModel
 
-class UserInDB(BaseModel):
-    username: str
-    password: str
-    balance: int
+from sqlalchemy import Column, Integer, String, ForeignKey
+from db.db_connection import Base, engine
 
-database_users = Dict[str, UserInDB]
-database_users = {
-    "camilo24": UserInDB(**{"username":"camilo24","password":"root","balance":12000}),
+class UserInDB(Base):
+    __tablename__ = "users"
+    username = Column(String, primary_key=True, unique=True)
+    password = Column(String)
+    balance = Column(Integer)
 
-    "andres18": UserInDB(**{"username":"andres18", "password":"hola", "balance":34000}),
+Base.metadata.create_all(bind=engine)
 
-    "eslunap19": UserInDB(**{"username":"eslunap19", "password":"123456", "balance":100000}),
-}
+# class UserInDB(BaseModel):
+#     username: str
+#     password: str
+#     balance: int
 
-def get_user(username: str):
-    if username in database_users.keys():
-        return database_users[username]
-    else:
-        return None
+# database_users = Dict[str, UserInDB]
+# database_users = {
+#     "camilo24": UserInDB(**{"username":"camilo24","password":"root","balance":12000}),
 
-def update_user(user_in_db: UserInDB):
-    database_users[user_in_db.username] = user_in_db
-    return user_in_db
+#     "andres18": UserInDB(**{"username":"andres18", "password":"hola", "balance":34000}),
+
+#     "eslunap19": UserInDB(**{"username":"eslunap19", "password":"123456", "balance":100000}),
+# }
+
+# def get_user(username: str):
+#     if username in database_users.keys():
+#         return database_users[username]
+#     else:
+#         return None
+
+# def update_user(user_in_db: UserInDB):
+#     database_users[user_in_db.username] = user_in_db
+#     return user_in_db
