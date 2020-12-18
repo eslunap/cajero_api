@@ -32,3 +32,14 @@ async def get_balance(username: str, db: Session = Depends(get_db)):
     if user_in_db == None:
         raise HTTPException(status_code=404,detail="El usuario no existe")
     return user_in_db
+
+@router.post("/user/register/")
+async def auth_user(user_in: UserIn, db: Session = Depends(get_db)):
+
+    user_in_db = UserInDB(**user_in.dict(), balance = 100000)
+
+    db.add(user_in_db)
+    db.commit()
+    db.refresh(user_in_db)
+
+    return {"Mensaje":"El usuario fue creado correctamente"}
