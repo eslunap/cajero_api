@@ -34,7 +34,7 @@ async def get_balance(username: str, db: Session = Depends(get_db)):
     return user_in_db
 
 @router.post("/user/register/")
-async def auth_user(user_in: UserIn, db: Session = Depends(get_db)):
+async def register_user(user_in: UserIn, db: Session = Depends(get_db)):
 
     user_in_db = UserInDB(**user_in.dict(), balance = 100000)
 
